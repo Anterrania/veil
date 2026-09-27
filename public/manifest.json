@@ -1,0 +1,10 @@
+{
+  "name": "VIPER",
+  "short_name": "VIPER",
+  "description": "Anterrania messenger and realm. Install from Safari Share then Add to Home Screen.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b10",
+  "theme_color": "#0b0b10",
+  "icons": [{ "src": "icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" }]
+}
