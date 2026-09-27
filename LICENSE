@@ -1,0 +1,5 @@
+VIPER / Anterrania
+Copyright 2026 Anterranian Monarch
+
+NIST PQ names (FIPS 203 ML-KEM, FIPS 204 ML-DSA, FIPS 205 SLH-DSA) are references.
+AES-256-GCM is implemented. Hash-lattice envelope is labeled NOT ML-KEM.
