@@ -1,0 +1,6 @@
+{
+  "protocol": "RepoPulse",
+  "static": "https://raw.githubusercontent.com/Anterrania/veil/main/",
+  "socket": "",
+  "note": "Put wss://your-host here. Empty = same origin."
+}
