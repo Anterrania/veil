@@ -1,0 +1,30 @@
+// Stable signing: one key for debug and release so every build installs over the previous one without data loss.
+// Key lives OUTSIDE git. Point VIPER_SIGNING_PROPS at a properties file (storeFile, storePassword, keyAlias, keyPassword);
+// default ~/keys/viper-release.properties. Without it, builds fall back to the Android debug key and print a warning.
+def propsFile = new File(System.getenv('VIPER_SIGNING_PROPS') ?: (System.getProperty('user.home') + '/keys/viper-release.properties'))
+def vprops = new Properties()
+file("../../version.properties").withInputStream { vprops.load(it) }
+android {
+    defaultConfig {
+        versionCode vprops['VERSION_CODE'].toInteger()
+        versionName vprops['VERSION_NAME']
+    }
+    if (propsFile.exists()) {
+        def p = new Properties()
+        propsFile.withInputStream { p.load(it) }
+        signingConfigs {
+            viper {
+                storeFile file(p['storeFile'])
+                storePassword p['storePassword']
+                keyAlias p['keyAlias']
+                keyPassword p['keyPassword']
+            }
+        }
+        buildTypes {
+            debug { signingConfig signingConfigs.viper }
+            release { signingConfig signingConfigs.viper }
+        }
+    } else {
+        logger.warn("Viper signing properties not found at ${propsFile}; using the Android debug key. Builds will NOT install over stable-key builds.")
+    }
+}
